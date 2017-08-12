@@ -13,7 +13,7 @@ library(shiny)
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Prevalence of HIV, total (% of population ages 15-49)"),
+  titlePanel("Top 10 Countries with highest HIV Prevalence"),
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
@@ -23,11 +23,14 @@ shinyUI(fluidPage(
                    min = 1991,
                    max = 2015,
                    value = 1)
-    ),
     
+    ),
+
     # Show a plot of the generated distribution
     mainPanel(
-       plotOutput("distPlot")
+       plotOutput("distPlot"),
+       includeHTML("documentation.Rhtml")
     )
+
   )
 ))

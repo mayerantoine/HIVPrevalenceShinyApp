@@ -21,16 +21,17 @@ shinyServer(function(input, output) {
     
      # calculate top ten
     top <- top_10_prev(input$year,hivdata)
-    t <- paste("Top 10 Country HIV Prevalence",input$year,sep = "  ")
+    t <- paste("Top 10 Countries with highest HIV Prevalence",input$year,sep = "  ")
     
     ## generate plot
-    g <- top %>% ggplot(aes(x= Country,y=Prevalence))
+    g <- top %>% ggplot(aes(x= reorder(Country,Prevalence),y=Prevalence))
     g+geom_col(width = 0.5) +
         coord_flip()+
         labs(title=t, 
              subtitle="Prevalence of HIV, total (% of population ages 15-49)", 
-             caption="source: https://data.worldbank.org , UNAIDS Estimates") + 
-        theme(axis.text.x = element_text(angle=65, vjust=0.4))
+             caption="source: https://data.worldbank.org , UNAIDS Estimates",
+             x="Country") + 
+        theme(axis.text.x = element_text(angle=65, vjust=0.3))
     
   })
   

@@ -1,0 +1,65 @@
+Top 10 Countries with the highest HIV Prevalence
+========================================================
+author: Mayer Antoine
+date: 8 August, 2017
+autosize: true
+
+HIV Prevalence ?
+========================================================
+
+- HIV continues to be a major global public health issue.
+- In 2015, an estimated 36.7 million people were living with HIV
+- The  HIV Prevalence gives the proportion of the population living with HIV
+- Prevalence of HIV, (% of population ages 15-49)
+
+What is our data source?
+========================================================
+
+- The data  source is from World Bank website 
+- HIV prevalence estimation was done by UNAIDS
+- The data can be download  from the worldbank website
+
+What is the data look like ?
+========================================================
+
+```{r echo=FALSE}
+source("load_data.R")
+data = load_data()
+```
+
+```{r }
+head(data)
+
+```
+
+What does the app do?
+========================================================
+
+- Load data from the HIV Prevalence data file
+- Display the UI page with the top countries with the highest HIV Prevalence for 1991
+- The user can use the slider input to change the year
+- The app re-calculate the top countries with the highest HIV Prevalence for the year selected
+- Render the ggplot visual to show the new output
+
+
+Top 10 Country with the highest burden 2015
+========================================================
+
+```{r, echo=FALSE}
+  
+    top <- top_10_prev(2015,data)
+    t <- paste("Top 10 Countries with the highest HIV Prevalence",2015,sep = "  ")
+
+    g <- top %>% ggplot(aes(x= reorder(Country,Prevalence),y=Prevalence))
+    g+geom_col(width = 0.5) +
+        coord_flip()+
+        labs(title=t, 
+             subtitle="Prevalence of HIV, total (% of population ages 15-49)", 
+             caption="source: https://data.worldbank.org , UNAIDS Estimates",
+             x="Country") + 
+        theme(axis.text.x = element_text(angle=65, vjust=0.3))
+```
+
+
+Thank You
+========================================================
